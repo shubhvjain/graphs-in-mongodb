@@ -1,0 +1,19 @@
+{
+  "name": "graphs-in-mongodb",
+  "version": "1.0.0",
+  "description": "Building graphs in mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhvjain/graphs-in-mongodb.git"
+  },
+  "author": "shubh jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shubhvjain/graphs-in-mongodb/issues"
+  },
+  "homepage": "https://github.com/shubhvjain/graphs-in-mongodb#readme"
+}
