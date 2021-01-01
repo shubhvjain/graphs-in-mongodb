@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/shubhvjain/graphs-in-mongodb/issues"
   },
-  "homepage": "https://github.com/shubhvjain/graphs-in-mongodb#readme"
+  "homepage": "https://github.com/shubhvjain/graphs-in-mongodb#readme",
+  "dependencies": {
+    "mongodb": "3.6.3"
+  }
 }
