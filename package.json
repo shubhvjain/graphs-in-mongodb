@@ -18,5 +18,8 @@
   "homepage": "https://github.com/shubhvjain/graphs-in-mongodb#readme",
   "dependencies": {
     "mongodb": "3.6.3"
+  },
+  "devDependencies": {
+    "eslint": "7.16.0"
   }
 }
