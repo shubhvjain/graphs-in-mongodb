@@ -29,7 +29,7 @@ You must answer the following 3 questions to understand the structure of the gra
     ![loop](/docs/loop.png)
 
 
-(from Rosen, Kenneth H., and Krithivasan, Kamala. Discrete Mathematics and Its Applications: With Combinatorics and Graph Theory. India, McGraw-Hill Companies, 2012. )
+(from [Rosen, Kenneth H., and Krithivasan, Kamala. Discrete Mathematics and Its Applications: With Combinatorics and Graph Theory. India, McGraw-Hill Companies, 2012.](https://www.google.co.in/books/edition/Discrete_Mathematics_and_Its_Application/C2c6twAACAAJ?hl=en) )
 
 
 By defualt, all the above flags are `false` (which make the default graph to be undircected, simple , without loops)
