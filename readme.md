@@ -25,7 +25,10 @@ You must answer the following 3 questions to understand the structure of the gra
 - Do you want multiple edges between same pair of vertices ? (set `multiEdges` to `true/false` accordingly )
     ![multi-edges](/docs/multipleEdge.png)
 - Are loops present in your graph ? (if yes, set `loops` to `true`)
+
     ![loop](/docs/loop.png)
+
+
 (from Rosen, Kenneth H., and Krithivasan, Kamala. Discrete Mathematics and Its Applications: With Combinatorics and Graph Theory. India, McGraw-Hill Companies, 2012. )
 
 
