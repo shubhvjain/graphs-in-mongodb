@@ -7,7 +7,7 @@ class mGraph {
         this.graphName = graphName
         if (!options.dbURL) { throw new Error("Specify MongoDB URL") }
         if (!options.dbName) { throw new Error("Specify MongoDB Database name") }
-        if (!options.collection) { throw new Error("Specify MongoDB Database name") }
+        if (!options.collection) { throw new Error("Specify MongoDB collection") }
 
         this.dbName = options.dbName
         this.dbURL = options.dbURL
