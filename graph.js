@@ -1,7 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
 
 class mGraph {
-    constructor(graphName, options = {}) {
+    constructor(graphName, options = {
+        directed:false,
+        multiEdges:false,
+        loops:false
+    }) {
         let requiredOptions = ["dbURL", "dbName", "collection"]
         let validOptions = []
         this.graphName = graphName
@@ -16,9 +20,9 @@ class mGraph {
 
         // config for  simple unidirected graph
         this.graph = {}
-        this.graph.directed = false
-        this.graph.multiEdges = false
-        this.graph.loops = false
+        this.graph.directed = options.directed 
+        this.graph.multiEdges = options.multiEdges
+        this.graph.loops = options.loops
 
         console.log("Graph type : " + this.getGraphType())
         console.log("Starting connection.....")
@@ -93,6 +97,5 @@ class mGraph {
             return index === 0 ? word.toLowerCase() : word.toUpperCase();
         }).replace(/\s+/g, '');
     }
-
 }
 module.exports = mGraph
