@@ -74,6 +74,7 @@ class mGraph {
             // add edge in the graph 
             newEdge["label"] = this.convertToCC(options.label ? options.label : "")
             newEdge["meta"] = {
+                docType:"graphEdge",
                 addedOn: new Date(),
                 originalLabel: options.label ? options.label : ""
             }
