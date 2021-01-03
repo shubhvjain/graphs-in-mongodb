@@ -25,9 +25,9 @@ class mGraph {
         this.graph.loops = options.loops
 
         console.log("Graph type : " + this.getGraphType())
-        console.log("Starting connection.....")
+        // console.log("Starting connection.....")
         MongoClient.connect(this.dbURL, this.defaultMongoOptions, function (err, client) {
-            console.log("....connected successfully to server")
+        //     console.log("....connected successfully to server")
         });
     }
     getGraphType() {
@@ -96,6 +96,24 @@ class mGraph {
         return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
             return index === 0 ? word.toLowerCase() : word.toUpperCase();
         }).replace(/\s+/g, '');
+    }
+    async getDegree(node){
+        // degree of a vertex in simple non directional , in-degree,out-degree vertex in case of directional graphs 
+    }
+    async editEdge(edgeId){
+        // to edit an edge , given edgeId
+    }
+    async deleteEdge(edgeId){
+        // to delete an edge between 2 nodes , edgeId required
+    }
+    async deleteEdge(node1,node2,label){
+        // to delete an edge between 2 nodes and the edge label
+    }
+    async showRelatedEdges(node){
+        // returns all edges related to the input node 
+    }
+    async showGraph(node){
+        // returns the full graph 
     }
 }
 module.exports = mGraph
