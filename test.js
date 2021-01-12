@@ -18,6 +18,11 @@ main = async () => {
             collection: "knowledge1"
         })
 
+       //  let deg = await graph1.getDegree({"id":"5feed9da1422dcf1ea1e9031","collection":"cities"})
+       //  graph1.addEdge({id:"5feed9da1422dcf1ea1e9032","collection":"cities"},{id:"5feed9da1422dcf1ea1e9031","collection":"cities"},{"label":"Some road"})
+       //  console.log(deg)
+       //  console.log(deg)
+
     } catch (error) {
         console.log("error.....")
         console.log(error)

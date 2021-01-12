@@ -2,9 +2,9 @@ const MongoClient = require('mongodb').MongoClient;
 
 class mGraph {
     constructor(graphName, options = {
-        directed:false,
-        multiEdges:false,
-        loops:false
+        directed: false,
+        multiEdges: false,
+        loops: false
     }) {
         let requiredOptions = ["dbURL", "dbName", "collection"]
         let validOptions = []
@@ -20,14 +20,14 @@ class mGraph {
 
         // config for  simple unidirected graph
         this.graph = {}
-        this.graph.directed = options.directed 
+        this.graph.directed = options.directed
         this.graph.multiEdges = options.multiEdges
         this.graph.loops = options.loops
 
         console.log("Graph type : " + this.getGraphType())
         // console.log("Starting connection.....")
         MongoClient.connect(this.dbURL, this.defaultMongoOptions, function (err, client) {
-        //     console.log("....connected successfully to server")
+            //     console.log("....connected successfully to server")
         });
     }
     getGraphType() {
@@ -78,7 +78,7 @@ class mGraph {
             // add edge in the graph 
             newEdge["label"] = this.convertToCC(options.label ? options.label : "")
             newEdge["meta"] = {
-                docType:"graphEdge",
+                docType: "graphEdge",
                 addedOn: new Date(),
                 originalLabel: options.label ? options.label : ""
             }
@@ -92,27 +92,46 @@ class mGraph {
         }
     }
     convertToCC(str) {
+        //to convert a string into Camel case
         // https://stackoverflow.com/a/2970667
         return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
             return index === 0 ? word.toLowerCase() : word.toUpperCase();
         }).replace(/\s+/g, '');
     }
-    async getDegree(node){
-        // degree of a vertex in simple non directional , in-degree,out-degree vertex in case of directional graphs 
+
+    async getDegree(node) {
+        // degree of a vertex in simple non directional , in-degree,out-degree vertex in case of directional graphs
+        // node : id,collection
+        let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
+        let db = client.db(this.dbName)
+        let query = {
+            "$or": [
+                {
+                    "graphName": this.graphName,
+                    "node1": {id: node.id,collection: node.collection}
+                },
+                {
+                    "graphName": this.graphName,
+                    "node2": {id: node.id, collection: node.collection}
+                }
+            ]
+        }
+        let searchEdges = await db.collection(this.collection).find(query).toArray()
+        return {simpleDegree: searchEdges.length}
     }
-    async editEdge(edgeId){
+    async editEdge(edgeId) {
         // to edit an edge , given edgeId
     }
-    async deleteEdge(edgeId){
+    async deleteEdge(edgeId) {
         // to delete an edge between 2 nodes , edgeId required
     }
-    async deleteEdge(node1,node2,label){
+    async deleteEdge(node1, node2, label) {
         // to delete an edge between 2 nodes and the edge label
     }
-    async showRelatedEdges(node){
+    async showRelatedEdges(node) {
         // returns all edges related to the input node 
     }
-    async showGraph(node){
+    async showGraph(node) {
         // returns the full graph 
     }
 }
