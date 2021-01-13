@@ -128,6 +128,9 @@ class mGraph {
     async deleteEdge(node1, node2, label) {
         // to delete an edge between 2 nodes and the edge label
     }
+    async adjacentNodes(node,level=1){
+        // returns nodes adjacent to a given node 
+    }
     async showRelatedEdges(node) {
         // returns all edges related to the input node 
     }
