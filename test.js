@@ -1,4 +1,7 @@
 let mGraph = require("./graph")
+pt = (obj)=>{
+    console.log(JSON.stringify(obj,null,2))
+}
 main = async () => {
     try {
         let graph1 = new mGraph("roadmap", {
@@ -11,7 +14,8 @@ main = async () => {
         //     {id:"5feeeb571422dcf1ea1e904d",collection:"cities"},
         //     {label:"Golden Quadrilateral"}
         // )
-
+        // let edges1 = await  graph1.adjacentNodes({id:"5feed9da1422dcf1ea1e9033",collection:"cities"})
+        // pt(edges1)
         let graph2 = new mGraph("destinations", {
             dbURL: process.env.MDB,
             dbName: "graph1",

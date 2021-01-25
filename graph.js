@@ -26,22 +26,26 @@ class mGraph {
 
         console.log("Graph type : " + this.getGraphType())
         // console.log("Starting connection.....")
-        MongoClient.connect(this.dbURL, this.defaultMongoOptions, function (err, client) {
+        //MongoClient.connect(this.dbURL, this.defaultMongoOptions, function (err, client) {
             //     console.log("....connected successfully to server")
-        });
+        //});
     }
     getGraphType() {
+        /**
+         *  Returns the type of graph. The graph type is determined using 3 options provided with the constructor : multiEdges,directed and loops
+         */
         let graphType = ""
         graphType += this.graph.multiEdges ? "muti" : "simple"
-        graphType += this.graph.directed ? "-directed " : "-undirected "
+        graphType += this.graph.directed ? "-directed" : "-undirected"
         graphType += this.graph.loops ? "-withLoops" : ""
-        return graphType
+        return graphType.trim()
     }
     async addEdge(node1, node2, options = {}) {
         try {
             // node1-----(options)-----node2
             // check if loops are allowed 
             if (!this.graph.loops) {
+                // if loops are not allowed, both nodes cannot be same 
                 let isSame = node1.id == node2.id && node1.collection == node2.collection
                 if (isSame) { throw new Error("Loops not allowed in " + this.getGraphType() + " graph") }
             }
@@ -57,6 +61,7 @@ class mGraph {
 
             // check if mulitple edges allowed
             if (!this.graph.multiEdges) {
+                // reject request if there cannot be mulitple edges between 2 nodes 
                 let searchRecords = await db.collection(this.collection).find(newEdge).toArray()
                 if (searchRecords.length > 0) {
                     throw new Error("Multiple edges between 2 vertices not allowed in " + this.getGraphType() + " graph")
@@ -64,6 +69,11 @@ class mGraph {
             }
 
             if (!this.graph.directed) {
+                /**
+                 *  if the graph is directed, node1--->node2 and node2--->node1 are different 
+                 *  but for undirected graph node1---node2 and node2---node1 are same so only 1 should be stored  
+                **/
+                // checking if reverse graph already exists 
                 let reverseNode = {
                     graphName: this.graphName,
                     node1: { id: node2.id, collection: node2.collection },
@@ -85,11 +95,8 @@ class mGraph {
             newEdge["data"] = options["data"] ? options["data"] : {}
             console.log(newEdge)
             await db.collection(this.collection).insertOne(newEdge)
-            // db.close();
             return newEdge
-        } catch (error) {
-            throw error
-        }
+        } catch (error) {throw error}
     }
     convertToCC(str) {
         //to convert a string into Camel case
@@ -121,6 +128,7 @@ class mGraph {
     }
     async editEdge(edgeId) {
         // to edit an edge , given edgeId
+
     }
     async deleteEdge(edgeId) {
         // to delete an edge between 2 nodes , edgeId required
@@ -128,8 +136,12 @@ class mGraph {
     async deleteEdge(node1, node2, label) {
         // to delete an edge between 2 nodes and the edge label
     }
+    buildQuery(){
+    }
     async adjacentNodes(node,level=1){
         // returns nodes adjacent to a given node 
+        let adjEdges 
+        return adjEdges
     }
     async showRelatedEdges(node) {
         // returns all edges related to the input node 
