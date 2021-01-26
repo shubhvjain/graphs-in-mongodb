@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-var {ObjectId} = require('mongodb'); 
+var { ObjectId } = require('mongodb');
 
 class mGraph {
     constructor(graphName, options = {
@@ -28,7 +28,7 @@ class mGraph {
         console.log("Graph type : " + this.getGraphType())
         // console.log("Starting connection.....")
         //MongoClient.connect(this.dbURL, this.defaultMongoOptions, function (err, client) {
-            //     console.log("....connected successfully to server")
+        //     console.log("....connected successfully to server")
         //});
     }
     getGraphType() {
@@ -97,17 +97,43 @@ class mGraph {
             console.log(newEdge)
             await db.collection(this.collection).insertOne(newEdge)
             return newEdge
-        } catch (error) {throw error}
+        } catch (error) { throw error }
     }
     async deleteEdge(edgeId) {
         // to delete an edge between 2 nodes , edgeId required
         let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
         let db = client.db(this.dbName)
-        let query = {"_id":ObjectId(edgeId)}
+        let query = { "_id": ObjectId(edgeId) }
         await db.collection(this.collection).deleteOne(query)
-        return {msg:"Deleted"}
+        return { msg: "Deleted" }
     }
-    
+    async editEdge(edgeId, updates) {
+        // to edit an edge , given edgeId
+        // valid updates fields : label, data
+        let validFields = ['label', 'data']
+        let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
+        let db = client.db(this.dbName)
+        let query = { "_id": ObjectId(edgeId) }
+        let edge = await db.collection(this.collection).findOne(query)
+        validFields.map(itm => {
+            if (updates[itm]) {
+                if (itm == "label") {
+                    edge[itm] = this.convertToCC(updates[itm])
+                    edge["meta"]["originalLabel"] = updates[itm]
+                } else {
+                    edge[itm] = updates[itm]
+                }
+            }
+        })
+        edge["meta"]["updatedOn"] = new Date()
+
+        let newUpdate = { $set: { data: edge["data"], label: edge["label"], meta: edge["meta"] } };
+        // console.log(JSON.stringify(newUpdate, null, 2))
+
+        await db.collection(this.collection).updateOne(query, newUpdate)
+        return { msg: "Updated" }
+    }
+
     convertToCC(str) {
         //to convert a string into Camel case
         // https://stackoverflow.com/a/2970667
@@ -125,29 +151,26 @@ class mGraph {
             "$or": [
                 {
                     "graphName": this.graphName,
-                    "node1": {id: node.id,collection: node.collection}
+                    "node1": { id: node.id, collection: node.collection }
                 },
                 {
                     "graphName": this.graphName,
-                    "node2": {id: node.id, collection: node.collection}
+                    "node2": { id: node.id, collection: node.collection }
                 }
             ]
         }
         let searchEdges = await db.collection(this.collection).find(query).toArray()
-        return {simpleDegree: searchEdges.length}
+        return { simpleDegree: searchEdges.length }
     }
-    async editEdge(edgeId) {
-        // to edit an edge , given edgeId
 
-    }
     // async deleteEdge(node1, node2, label) {
     //     // to delete an edge between 2 nodes and the edge label
     // }
-    buildQuery(){
+    buildQuery() {
     }
-    async adjacentNodes(node,level=1){
+    async adjacentNodes(node, level = 1) {
         // returns nodes adjacent to a given node 
-        let adjEdges 
+        let adjEdges
         return adjEdges
     }
     async showRelatedEdges(node) {
