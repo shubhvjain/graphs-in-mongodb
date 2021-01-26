@@ -16,6 +16,8 @@ main = async () => {
         // )
         // let edges1 = await  graph1.adjacentNodes({id:"5feed9da1422dcf1ea1e9033",collection:"cities"})
         // pt(edges1)
+    //    let delEdge = await graph1.deleteEdge("5feef9c4dda839f6dfe2cf74")
+    //    console.log(delEdge)
         let graph2 = new mGraph("destinations", {
             dbURL: process.env.MDB,
             dbName: "graph1",
