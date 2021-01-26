@@ -1,4 +1,4 @@
-Graphs are really powerful data structures. They help up capture relationships between different objects. In this project, I have tried to store  different types of graphs that relate documents stored inside the database.
+Graphs are really powerful data structures. They help us capture relationships between different objects. In this project, I have tried to store  different types of graphs that relate documents stored inside the database. These relations are stored as edges inside a collection in `MongoDB`
 
 **How are graphs stored ?**
 The edges connecting 2 nodes in a graph is stored. The nodes of this graphs are 2 JSON documents stored in the database (in any collection)
@@ -43,3 +43,46 @@ let graph1 = new mGraph("graph_name", {
             collection: "knowledge1"
         })
 ```
+
+### API
+---
+
+Note : Throughtout the APIs, `node1` and `node2` are the  2 nodes that an edge joins. Each edge in the graph is defined a unique `ID` 
+
+**Inserting an edge**
+```{js}
+let newEdge = async graph1.addEdge(node1, node2, options = {})
+```
+
+**Updating an edge**
+```{js}
+```
+
+**Deleting an edge**
+```{js}
+
+```
+
+
+**Get complete graph**
+```{js}
+TODO
+```
+
+**Getting neighbours of a vertex**
+```{js}
+TODO
+```
+
+**Getting degree of a vertex**
+```{js}
+TODO
+```
+
+**Getting the type of graph**
+```{js}
+getGraphType()
+```
+
+
+Graphs are really powerful data structure. They help us relate different objects 
