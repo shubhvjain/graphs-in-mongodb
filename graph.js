@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+var {ObjectId} = require('mongodb'); 
 
 class mGraph {
     constructor(graphName, options = {
@@ -98,6 +99,15 @@ class mGraph {
             return newEdge
         } catch (error) {throw error}
     }
+    async deleteEdge(edgeId) {
+        // to delete an edge between 2 nodes , edgeId required
+        let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
+        let db = client.db(this.dbName)
+        let query = {"_id":ObjectId(edgeId)}
+        await db.collection(this.collection).deleteOne(query)
+        return {msg:"Deleted"}
+    }
+    
     convertToCC(str) {
         //to convert a string into Camel case
         // https://stackoverflow.com/a/2970667
@@ -130,12 +140,9 @@ class mGraph {
         // to edit an edge , given edgeId
 
     }
-    async deleteEdge(edgeId) {
-        // to delete an edge between 2 nodes , edgeId required
-    }
-    async deleteEdge(node1, node2, label) {
-        // to delete an edge between 2 nodes and the edge label
-    }
+    // async deleteEdge(node1, node2, label) {
+    //     // to delete an edge between 2 nodes and the edge label
+    // }
     buildQuery(){
     }
     async adjacentNodes(node,level=1){
