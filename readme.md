@@ -1,19 +1,19 @@
-Graphs are really powerful data structures. They help us capture relationships between different objects. In this project, I have tried to store  different types of graphs that relate documents stored inside the database. These relations are stored as edges inside a collection in `MongoDB`
+Graphs are really powerful data structures. They help us capture relationships between different objects. In this project, I have tried to store  different types of graphs that relate documents stored inside MongoDB database. These relations are stored as edges inside a collection.
 
 **How are graphs stored ?**
-The edges connecting 2 nodes in a graph is stored. The nodes of this graphs are 2 JSON documents stored in the database (in any collection)
+The edge connecting 2 nodes  is stored. The nodes of this graphs are 2 JSON documents stored in the database (in any collection)
 
   
 ### Creating a new graph
 
 Create a new instance of the `mGraph` class.
 
-`let g = new mGraph("graphname",{ options })`
+`let g = new mGraph("graphname",{ ...options })`
 
 List of `options` :
-- `dbURL` (`required`) : MongoDB connection URI string
-- `dbName` (`required`) : Database name
-- `collection` (`required`) : Name of the collection in the selected database in which the graph will be stored. Note that you can store multiple graphs in a single collection
+- `dbURL` (required) : MongoDB connection URI string
+- `dbName` (required) : Database name
+- `collection` (required) : Name of the collection in the selected database in which the graph will be stored. Note that you can store multiple graphs in a single collection
 
 By default, the graphs created are `simple-undirected-without loops`. However, other types of graphs are supported too. 
 
@@ -27,9 +27,6 @@ You must answer the following 3 questions to understand the structure of the gra
 - Are loops present in your graph ? (if yes, set `loops` to `true`)
 
     ![loop](/docs/loop.png)
-
-
-(from [Rosen, Kenneth H., and Krithivasan, Kamala. Discrete Mathematics and Its Applications: With Combinatorics and Graph Theory. India, McGraw-Hill Companies, 2012.](https://www.google.co.in/books/edition/Discrete_Mathematics_and_Its_Application/C2c6twAACAAJ?hl=en) )
 
 
 By defualt, all the above flags are `false` (which make the default graph to be undircected, simple , without loops)
@@ -86,3 +83,8 @@ getGraphType()
 
 
 Graphs are really powerful data structure. They help us relate different objects 
+
+
+### Graph reference
+
+- [Rosen, Kenneth H., and Krithivasan, Kamala. Discrete Mathematics and Its Applications: With Combinatorics and Graph Theory. India, McGraw-Hill Companies, 2012.](https://www.google.co.in/books/edition/Discrete_Mathematics_and_Its_Application/C2c6twAACAAJ?hl=en) 
