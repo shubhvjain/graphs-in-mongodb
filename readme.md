@@ -82,7 +82,6 @@ getGraphType()
 ```
 
 
-Graphs are really powerful data structure. They help us relate different objects 
 
 
 ### Graph reference
