@@ -170,8 +170,24 @@ class mGraph {
     }
     async adjacentNodes(node, level = 1) {
         // returns nodes adjacent to a given node 
-        let adjEdges
-        return adjEdges
+        if(!node){throw new Error("No node specified")}
+        let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
+        let db = client.db(this.dbName)
+        let query = {
+            "$or": [
+                {
+                    "graphName": this.graphName,
+                    "node1": { id: node.id, collection: node.collection }
+                },
+                {
+                    "graphName": this.graphName,
+                    "node2": { id: node.id, collection: node.collection }
+                }
+            ]
+        }
+        // console.log(JSON.stringify(query,null,2))
+        let adjEdges = await db.collection(this.collection).find(query).toArray()
+        return { edges: adjEdges }
     }
     async showRelatedEdges(node) {
         // returns all edges related to the input node 
