@@ -176,8 +176,13 @@ class mGraph {
     async showRelatedEdges(node) {
         // returns all edges related to the input node 
     }
-    async showGraph(node) {
+    async getGraph(node) {
         // returns the full graph 
+        let client = await MongoClient.connect(this.dbURL, this.defaultMongoOptions);
+        let db = client.db(this.dbName)
+        let query = {graphName: this.graphName}
+        let searchEdges = await db.collection(this.collection).find(query).toArray()
+        return { edges: searchEdges , graphName: this.graphName }
     }
 }
 module.exports = mGraph
