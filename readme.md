@@ -63,7 +63,7 @@ await graph1.deleteEdge("edgeID")
 
 **Get complete graph**
 ```{js}
-TODO
+let allEdges = await graph1.getGraph()
 ```
 
 **Getting neighbours of a vertex**
