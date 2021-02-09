@@ -25,13 +25,16 @@ main = async () => {
             collection: "knowledge1"
         })
 
-        let a = await graph1.getGraph()
-        console.log(JSON.stringify(a,null,2))
+        //let a = await graph1.getGraph()
+        //console.log(JSON.stringify(a,null,2))
 
+        let b = await graph1.adjacentNodes({id:"5feed9da1422dcf1ea1e9032",collection:"cities"})
+        console.log(JSON.stringify(b,null,2))
        //  let deg = await graph1.getDegree({"id":"5feed9da1422dcf1ea1e9031","collection":"cities"})
        //  graph1.addEdge({id:"5feed9da1422dcf1ea1e9032","collection":"cities"},{id:"5feed9da1422dcf1ea1e9031","collection":"cities"},{"label":"Some road"})
        //  console.log(deg)
        //  console.log(deg)
+       // 5feed9da1422dcf1ea1e9032 5feed9da1422dcf1ea1e9032
 
     } catch (error) {
         console.log("error.....")
