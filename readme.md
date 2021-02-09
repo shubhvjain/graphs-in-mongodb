@@ -44,7 +44,7 @@ let graph1 = new mGraph("graph_name", {
 ### API
 ---
 
-Note : Throughtout the APIs, `node1` and `node2` are the  2 nodes that an edge joins. Each edge in the graph is defined a unique `ID` 
+Note : Throughtout the APIs, `node1` and `node2` are the  2 nodes that an edge joins. Each edge in the graph has an unique `edgeID` 
 
 **Inserting an edge**
 ```{js}
@@ -53,13 +53,13 @@ let newEdge = async graph1.addEdge(node1, node2, options = {})
 
 **Updating an edge**
 ```{js}
+await graph1.editEdge("edgeID",{data:{msg:"Updated message"}})
 ```
 
 **Deleting an edge**
 ```{js}
-
+await graph1.deleteEdge("edgeID")
 ```
-
 
 **Get complete graph**
 ```{js}
